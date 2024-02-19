@@ -15,6 +15,7 @@ const persistConfig = {
   version: 1,
   storage,
   whitelist: ["user"],
+  // filtering the user state
   transforms: [saveSubsetFilter],
   // default is 5000 which is too long, reduced to 1ms
   timeout: 1000,
