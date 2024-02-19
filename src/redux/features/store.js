@@ -7,7 +7,7 @@ import persistReducer from "redux-persist/es/persistReducer";
 import userSlice from "./user/userSlice";
 
 // you want to store only a subset of your state of reducer one
-// i.e userSlice:{error:"",  user: { }} ... only user is selected
+// i.e userSlice:{error:"",  user: { }} ... only user is selected. Doing this would ensure that when the user's status is offline and a refresh is made, it doesn't continue to remain offline, rather only the user data is kept while the status is refetched.
 const saveSubsetFilter = createFilter("user", ["user"]);
 
 const persistConfig = {
