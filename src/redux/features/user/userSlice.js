@@ -4,7 +4,7 @@ const initialState = {
   error: "",
   user: {
     id: "",
-    name: "",
+    name: "ben",
     email: "",
     picture: "",
     status: "",
@@ -31,6 +31,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { login } = userSlice.actions;
+export const { logout } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -1,23 +1,22 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
-} from "redux-persist";
+import createFilter from "redux-persist-transform-filter";
 import storage from "redux-persist/lib/storage";
 
 import persistReducer from "redux-persist/es/persistReducer";
 import userSlice from "./user/userSlice";
 
+// you want to store only a subset of your state of reducer one
+// i.e userSlice:{error:"",  user: { }} ... only user is selected
+const saveSubsetFilter = createFilter("user", ["user"]);
+
 const persistConfig = {
-  key: "root",
+  key: "user",
   version: 1,
   storage,
-  // default is 5000 which is too long
+  whitelist: ["user"],
+  transforms: [saveSubsetFilter],
+  // default is 5000 which is too long, reduced to 1ms
   timeout: 1000,
 };
 
@@ -32,9 +31,10 @@ const store = configureStore({
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+      // serializableCheck: {
+      //   ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      // },
+      serializableCheck: false,
     }),
 });
 
