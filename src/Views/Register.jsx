@@ -1,10 +1,15 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Input from "../components/Input/Input";
+import Picture from "../components/Input/Picture";
 import { registerSchema } from "../schema/registerSchema";
 
 const Register = () => {
+  // the exact picture file to be sent to cloudinary
+  const [picture, setPicture] = useState();
+  //   PICTURE TO BE DISPLAYED
+  const [readablePicture, setReadablePicture] = useState();
   const {
     register,
     handleSubmit,
@@ -16,6 +21,8 @@ const Register = () => {
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  console.log("picture file", picture);
 
   return (
     <div className="max-w-xl p-3 mx-auto border ">
@@ -58,13 +65,10 @@ const Register = () => {
           error={errors}
         />
         {/* Picture component here */}
-        <Input
-          register={register}
-          placeholder="Enter your picture (Optional)"
-          type="file"
-          label="Picture (Optional)"
-          field="picture"
-          error={errors}
+        <Picture
+          setPicture={setPicture}
+          setReadablePicture={setReadablePicture}
+          readablePicture={readablePicture}
         />
         <button type="submit"> Submit</button>
       </form>
