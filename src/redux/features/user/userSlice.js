@@ -17,14 +17,13 @@ export const registerUser = createAsyncThunk(
   "user/register",
   async (values, { rejectWithValue }) => {
     try {
-      const { data } = axios.post(
-        `http://localhost:8000/api/v1/auth/register`,
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/auth/register`,
         values,
       );
 
       return data;
     } catch (error) {
-      console.log("Error", error);
       rejectWithValue(error.response.data.error.message);
     }
   },

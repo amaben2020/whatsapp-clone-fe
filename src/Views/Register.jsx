@@ -1,7 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Input from "../components/Input/Input";
 import Picture from "../components/Input/Picture";
 import { registerUser } from "../redux/features/user/userSlice";
@@ -18,19 +20,34 @@ const Register = () => {
   } = useForm({
     resolver: yupResolver(registerSchema),
   });
-  const { user } = useSelector((state) => ({ ...state }));
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    dispatch(registerUser({ ...data, picture }));
+  const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`;
+
+  const onSubmit = async (data) => {
+    try {
+      const formData = new FormData();
+
+      formData.append("file", picture);
+      formData.append("upload_preset", "ml_default");
+
+      const { data: image } = await axios.post(CLOUDINARY_URL, formData);
+
+      let res = await dispatch(
+        registerUser({ ...data, picture: image.secure_url ?? "" }),
+      );
+
+      if (res.type.includes("fulfilled")) {
+        navigate("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Amaben@1
-
-  console.log("USER", user);
-
-  console.log("picture file", picture);
 
   return (
     <div className="max-w-xl p-3 mx-auto border ">
