@@ -26,6 +26,36 @@ const Register = () => {
           placeholder="Enter your name"
           type="text"
           label="Full Name"
+          field="name"
+        />
+        <Input
+          register={register}
+          placeholder="Enter your email"
+          type="email"
+          label="Email"
+          field="email"
+        />{" "}
+        <Input
+          register={register}
+          placeholder="Enter your password"
+          type="password"
+          label="Password"
+          field="password"
+        />{" "}
+        <Input
+          register={register}
+          placeholder="Enter your status"
+          type="text"
+          label="Status"
+          field="status"
+        />
+        {/* Picture component here */}
+        <Input
+          register={register}
+          placeholder="Enter your picture (Optional)"
+          type="text"
+          label="Picture (Optional)"
+          field="picture"
         />
         <button type="submit"> Submit</button>
       </form>
