@@ -5,14 +5,14 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input/Input";
 import { registerUser } from "../redux/features/user/userSlice";
-import { registerSchema } from "../schema/registerSchema";
+import { loginSchema } from "../schema/registerSchema";
 const Login = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(registerSchema),
+    resolver: yupResolver(loginSchema),
   });
 
   const navigate = useNavigate();

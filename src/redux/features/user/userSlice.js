@@ -29,6 +29,22 @@ export const registerUser = createAsyncThunk(
   },
 );
 
+export const loginUser = createAsyncThunk(
+  "user/register",
+  async (values, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/auth/login`,
+        values,
+      );
+
+      return data;
+    } catch (error) {
+      rejectWithValue(error.response.data.error.message);
+    }
+  },
+);
+
 const userSlice = createSlice({
   name: "user", // in debugger user/<action>
   initialState,
@@ -48,6 +64,7 @@ const userSlice = createSlice({
   },
 
   extraReducers: (builder) => {
+    // register
     builder.addCase(registerUser.pending, (state, payload) => {
       state.status = "pending";
     });
@@ -61,6 +78,24 @@ const userSlice = createSlice({
     });
 
     builder.addCase(registerUser.rejected, (state, payload) => {
+      state.status = "failed";
+      state.error = payload.error;
+    });
+
+    // login
+    builder.addCase(loginUser.pending, (state, payload) => {
+      state.status = "pending";
+    });
+
+    builder.addCase(loginUser.fulfilled, (state, action) => {
+      state.user.email = action?.payload.user?.email;
+      state.user.name = action?.payload.user?.name;
+      state.user.picture = action?.payload.user?.picture;
+      state.user.token = action?.payload.user?.token;
+      state.status = action?.payload.message;
+    });
+
+    builder.addCase(loginUser.rejected, (state, payload) => {
       state.status = "failed";
       state.error = payload.error;
     });
