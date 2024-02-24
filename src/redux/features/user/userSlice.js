@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 const initialState = {
   status: "",
   error: "",
@@ -11,6 +12,23 @@ const initialState = {
     token: "",
   },
 };
+
+export const registerUser = createAsyncThunk(
+  "user/register",
+  async (values, { rejectWithValue }) => {
+    try {
+      const { data } = axios.post(
+        `http://localhost:8000/api/v1/auth/register`,
+        values,
+      );
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log("Error", error);
+      rejectWithValue(error.response.data.error.message);
+    }
+  },
+);
 
 const userSlice = createSlice({
   name: "user", // in debugger user/<action>
@@ -28,6 +46,22 @@ const userSlice = createSlice({
       };
       state.status = "";
     },
+  },
+
+  extraReducers: (builder) => {
+    builder
+      .addCase(registerUser.pending, (state, payload) => {
+        state.status = "pending";
+      })
+      .addCase(registerUser.fulfilled, (state, payload) => {
+        console.log("PAYLOAD", payload);
+        state.status = "";
+        state.user = payload;
+      })
+      .addCase(registerUser.rejected, (state, payload) => {
+        state.status = "failed";
+        state.error = payload.error;
+      });
   },
 });
 

@@ -1,10 +1,11 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import Input from "../components/Input/Input";
 import Picture from "../components/Input/Picture";
+import { registerUser } from "../redux/features/user/userSlice";
 import { registerSchema } from "../schema/registerSchema";
-
 const Register = () => {
   // the exact picture file to be sent to cloudinary
   const [picture, setPicture] = useState();
@@ -17,10 +18,17 @@ const Register = () => {
   } = useForm({
     resolver: yupResolver(registerSchema),
   });
+  const { user } = useSelector((state) => ({ ...state }));
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     console.log(data);
+    dispatch(registerUser({ ...data, picture }));
   };
+
+  // Amaben@1
+
+  console.log(user);
 
   console.log("picture file", picture);
 
@@ -70,7 +78,14 @@ const Register = () => {
           setReadablePicture={setReadablePicture}
           readablePicture={readablePicture}
         />
-        <button type="submit"> Submit</button>
+        <button
+          type="submit"
+          disabled={errors.name || errors.email || errors.password}
+          className="p-3 border rounded-lg disabled:bg-gray-600 disabled:text-white disabled:cursor-not-allowed"
+        >
+          {" "}
+          Submit
+        </button>
       </form>
     </div>
   );
