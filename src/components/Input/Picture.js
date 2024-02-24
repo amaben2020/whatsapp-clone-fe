@@ -33,6 +33,12 @@ const Picture = ({ setReadablePicture, setPicture, readablePicture }) => {
     }
   };
 
+  const handleClear = () => {
+    setError("");
+    setPicture("");
+    setReadablePicture("");
+  };
+
   return (
     <div>
       <div className="flex flex-col gap-y-3">
@@ -46,14 +52,17 @@ const Picture = ({ setReadablePicture, setPicture, readablePicture }) => {
         />
         {error.length > 0 && <p className="text-red-500"> {error}</p>}
         {readablePicture && (
-          <div className="relative border">
+          <div className="relative">
             <img
               src={readablePicture}
               className="w-[300px] h-[200px] rounded-lg mx-auto shadow-lg"
               alt="img"
             />
 
-            <button className="absolute z-10 p-2 rounded-full right-[110px] -top-3 bg-red-300">
+            <button
+              className="absolute z-10 p-2 rounded-full right-[110px] -top-3 bg-red-300"
+              onClick={handleClear}
+            >
               🗑️
             </button>
           </div>
