@@ -32,6 +32,7 @@ const Register = () => {
           type="text"
           label="Full Name"
           field="name"
+          error={errors}
         />
         <Input
           register={register}
@@ -39,6 +40,7 @@ const Register = () => {
           type="email"
           label="Email"
           field="email"
+          error={errors}
         />{" "}
         <Input
           register={register}
@@ -46,6 +48,7 @@ const Register = () => {
           type="password"
           label="Password"
           field="password"
+          error={errors}
         />{" "}
         <Input
           register={register}
@@ -53,6 +56,7 @@ const Register = () => {
           type="text"
           label="Status"
           field="status"
+          error={errors}
         />
         {/* Picture component here */}
         <Input
@@ -61,6 +65,7 @@ const Register = () => {
           type="text"
           label="Picture (Optional)"
           field="picture"
+          error={errors}
         />
         <button type="submit"> Submit</button>
       </form>
