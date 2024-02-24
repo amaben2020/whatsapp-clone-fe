@@ -14,3 +14,13 @@ export const registerSchema = object({
       "Password must contain 1 uppercase letter, 1 lowercase letter, 1 special character and 1 number,",
     ),
 });
+
+export const loginSchema = object({
+  email: string().email().required("Please enter your email address"),
+  password: string()
+    .required("Enter your password")
+    .matches(
+      /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^a-zA-Z0-9]).{6,}$/,
+      "Password must contain 1 uppercase letter, 1 lowercase letter, 1 special character and 1 number,",
+    ),
+});

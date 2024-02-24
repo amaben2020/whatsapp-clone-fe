@@ -5,7 +5,7 @@ const initialState = {
   error: "",
   user: {
     id: "",
-    name: "ben",
+    name: "",
     email: "",
     picture: "",
     status: "",
@@ -48,19 +48,22 @@ const userSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder
-      .addCase(registerUser.pending, (state, payload) => {
-        state.status = "pending";
-      })
-      .addCase(registerUser.fulfilled, (state, payload) => {
-        console.log("PAYLOAD", payload);
-        state.status = "";
-        state.user = payload.meta.arg;
-      })
-      .addCase(registerUser.rejected, (state, payload) => {
-        state.status = "failed";
-        state.error = payload.error;
-      });
+    builder.addCase(registerUser.pending, (state, payload) => {
+      state.status = "pending";
+    });
+
+    builder.addCase(registerUser.fulfilled, (state, action) => {
+      state.user.email = action?.payload.user?.email;
+      state.user.name = action?.payload.user?.name;
+      state.user.picture = action?.payload.user?.picture;
+      state.user.token = action?.payload.user?.token;
+      state.status = action?.payload.message;
+    });
+
+    builder.addCase(registerUser.rejected, (state, payload) => {
+      state.status = "failed";
+      state.error = payload.error;
+    });
   },
 });
 
