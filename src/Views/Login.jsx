@@ -55,7 +55,7 @@ const Login = () => {
         <button
           type="submit"
           disabled={errors.name || errors.email || errors.password}
-          className="p-3 border rounded-lg disabled:bg-gray-600 disabled:text-white disabled:cursor-not-allowed"
+          className="p-3 mt-3 font-bold bg-white border rounded-lg disabled:bg-gray-600 disabled:text-white disabled:cursor-not-allowed hover:bg-gray-600 hover:text-white"
         >
           {" "}
           Submit
