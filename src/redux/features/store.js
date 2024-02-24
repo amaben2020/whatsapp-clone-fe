@@ -10,8 +10,10 @@ import {
   REGISTER,
   REHYDRATE,
 } from "redux-persist";
-import persistReducer from "redux-persist/es/persistReducer";
+// import persistReducer from "redux-persist/es/persistReducer";
+import { persistReducer } from "redux-persist";
 import userSlice from "./user/userSlice";
+import persistStore from "redux-persist/es/persistStore";
 
 // you want to store only a subset of your state of reducer one
 // i.e userSlice:{error:"",  user: { }} ... only user is selected. Doing this would ensure that when the user's status is offline and a refresh is made, it doesn't continue to remain offline, rather only the user data is kept while the status is refetched.
@@ -19,7 +21,7 @@ import userSlice from "./user/userSlice";
 // const saveSubsetFilter = createFilter("user", ["user"]);
 
 const persistConfig = {
-  key: "user",
+  key: "root",
   version: 1,
   storage,
   whitelist: ["user"],
@@ -35,7 +37,7 @@ const reducers = combineReducers({
 
 const persistedReducers = persistReducer(persistConfig, reducers);
 
-const store = configureStore({
+export const store = configureStore({
   reducer: persistedReducers,
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
@@ -47,4 +49,4 @@ const store = configureStore({
     }),
 });
 
-export default store;
+export const persistor = persistStore(store);

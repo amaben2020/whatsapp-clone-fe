@@ -10,6 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<View.Home />} />
           <Route path="/register" element={<View.Register />} />
+          <Route path="/login" element={<View.Login />} />
         </Routes>
       </Router>
     </PageLayout>

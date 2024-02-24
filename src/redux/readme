@@ -1,0 +1,1 @@
+Setup: https://medium.com/@xbstrxct/persisting-state-in-your-react-app-with-redux-persist-1e7dd877c58a#:~:text=In%20your%20Redux%20store%20configuration,of%20those%20reducers%20to%20persist.&text=%7D%3B,%3D%20persistReducer(persistConfig%2C%20rootReducer)%3B

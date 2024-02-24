@@ -4,8 +4,9 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input/Input";
-import { registerUser } from "../redux/features/user/userSlice";
-import { loginSchema } from "../schema/registerSchema";
+import { loginUser } from "../redux/features/user/userSlice";
+import { loginSchema } from "../schema/authSchema";
+
 const Login = () => {
   const {
     register,
@@ -20,19 +21,16 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      dispatch(registerUser({ ...data }));
-
+      dispatch(loginUser({ ...data }));
       navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
 
-  // Amaben@1
-
   return (
     <div className="max-w-xl p-3 mx-auto border ">
-      <h2 className="text-center"> Register </h2>
+      <h2 className="text-center"> Login </h2>
 
       <form
         className="flex flex-col justify-center space-y-3"
@@ -68,3 +66,7 @@ const Login = () => {
 };
 
 export default Login;
+
+// ben10@gmail.com
+// Amaben@1
+//Benzuggy007

@@ -30,7 +30,7 @@ export const registerUser = createAsyncThunk(
 );
 
 export const loginUser = createAsyncThunk(
-  "user/register",
+  "user/login",
   async (values, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Input from "../components/Input/Input";
 import Picture from "../components/Input/Picture";
 import { registerUser } from "../redux/features/user/userSlice";
-import { registerSchema } from "../schema/registerSchema";
+import { registerSchema } from "../schema/authSchema";
 // TODO: add a loading state with redux to show loading spinner
 const Register = () => {
   // the exact picture file to be sent to cloudinary
@@ -41,7 +41,7 @@ const Register = () => {
       );
 
       if (res.type.includes("fulfilled")) {
-        navigate("/");
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);
