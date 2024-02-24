@@ -17,7 +17,6 @@ const Register = () => {
     console.log(data);
   };
 
-  console.log("errors", errors);
   return (
     <div className="max-w-xl p-3 mx-auto border ">
       <h2 className="text-center"> Register </h2>
@@ -62,7 +61,7 @@ const Register = () => {
         <Input
           register={register}
           placeholder="Enter your picture (Optional)"
-          type="text"
+          type="file"
           label="Picture (Optional)"
           field="picture"
           error={errors}
