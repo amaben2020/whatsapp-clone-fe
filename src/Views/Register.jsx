@@ -28,7 +28,7 @@ const Register = () => {
 
   // Amaben@1
 
-  console.log(user);
+  console.log("USER", user);
 
   console.log("picture file", picture);
 

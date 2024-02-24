@@ -21,7 +21,7 @@ export const registerUser = createAsyncThunk(
         `http://localhost:8000/api/v1/auth/register`,
         values,
       );
-      console.log(data);
+
       return data;
     } catch (error) {
       console.log("Error", error);
@@ -56,7 +56,7 @@ const userSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, payload) => {
         console.log("PAYLOAD", payload);
         state.status = "";
-        state.user = payload;
+        state.user = payload.meta.arg;
       })
       .addCase(registerUser.rejected, (state, payload) => {
         state.status = "failed";

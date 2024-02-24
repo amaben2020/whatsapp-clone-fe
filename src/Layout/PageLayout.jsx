@@ -1,7 +1,7 @@
 import React from "react";
 
 const PageLayout = ({ children }) => {
-  return <div className="p-10">{children}</div>;
+  return <div className="min-h-screen p-10 bg-gray-800">{children}</div>;
 };
 
 export default PageLayout;
