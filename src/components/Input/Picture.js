@@ -49,6 +49,12 @@ const Picture = ({ setReadablePicture, setPicture, readablePicture }) => {
           type="file"
           label="Picture (Optional)"
           accept=".png, .jpg, .jpeg"
+          className="text-sm text-stone-500
+          file:mr-5 file:py-2 file:rounded-lg file:px-3 file:border-[1px]
+          file:text-xs file:font-medium
+          file:bg-stone-50 file:text-stone-700
+          hover:file:cursor-pointer hover:file:bg-blue-50
+          hover:file:text-blue-700"
         />
         {error.length > 0 && <p className="text-red-500"> {error}</p>}
         {readablePicture && (
@@ -60,7 +66,7 @@ const Picture = ({ setReadablePicture, setPicture, readablePicture }) => {
             />
 
             <button
-              className="absolute z-10 p-2 rounded-full right-[110px] -top-3 bg-red-300"
+              className="absolute z-10 p-2 rounded-full right-[110px] -top-3 bg-red-400"
               onClick={handleClear}
             >
               🗑️
