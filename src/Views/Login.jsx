@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input/Input";
 import { loginUser } from "../redux/features/user/userSlice";
@@ -16,6 +16,7 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
   });
 
+  const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -31,7 +32,7 @@ const Login = () => {
   return (
     <div className="max-w-xl p-3 mx-auto border ">
       <h2 className="text-center"> Login </h2>
-
+      {user.status === "pending" && <p>LOADING...</p>}
       <form
         className="flex flex-col justify-center space-y-3"
         onSubmit={handleSubmit(onSubmit)}

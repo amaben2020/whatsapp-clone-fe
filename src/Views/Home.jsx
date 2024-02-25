@@ -6,8 +6,12 @@ const Home = () => {
 
   return (
     <div>
-      Home
-      <button onClick={() => dispatch(logout())}>Logout</button>
+      <button
+        onClick={() => dispatch(logout())}
+        className="p-3 border rounded-lg "
+      >
+        Logout
+      </button>
     </div>
   );
 };
