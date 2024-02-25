@@ -30,7 +30,6 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       const formData = new FormData();
-
       //https://console.cloudinary.com/settings/c-0fda237e62029ae3f861d0eb41a1f7/upload_presets/3af6529ef9d9a1fd3ad3a57545cb79ff/edit
       formData.append("file", picture);
       formData.append("upload_preset", "ml_default");
