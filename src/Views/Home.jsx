@@ -8,7 +8,7 @@ const Home = () => {
     <div>
       <button
         onClick={() => dispatch(logout())}
-        className="p-3 border rounded-lg "
+        className="p-3 border rounded-lg"
       >
         Logout
       </button>
