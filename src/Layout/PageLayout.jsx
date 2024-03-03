@@ -8,7 +8,7 @@ const PageLayout = ({ children }) => {
       <header className="block w-full p-5 text-white bg-black">
         <nav>LOGOUT</nav>
       </header>
-      <div className="flex min-h-screen p-10 bg-gray-800 gap-x-6">
+      <div className="flex min-h-screen bg-gray-800 gap-x-6">
         <aside className="w-[40%] border ">
           <Sidebar header={<SidebarHeader />} />
         </aside>
