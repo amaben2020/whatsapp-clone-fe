@@ -15,7 +15,7 @@ const Notification = ({ text }) => {
           <p className="text-lg font-bold text-white"> {text} </p>
 
           <button onClick={handleShowNotification}>
-            <CloseIcon />
+            <CloseIcon className="fill-white" />
           </button>
         </div>
       )}
