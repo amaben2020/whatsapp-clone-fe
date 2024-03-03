@@ -1,7 +1,15 @@
 import clsx from "clsx";
 import React from "react";
 
-const Input = ({ register, placeholder, type, label, field, error }) => {
+const Input = ({
+  register,
+  placeholder,
+  type,
+  label,
+  field,
+  error,
+  className,
+}) => {
   return (
     <>
       <label htmlFor={label}>{label}</label>
@@ -10,6 +18,7 @@ const Input = ({ register, placeholder, type, label, field, error }) => {
         className={clsx(
           error[field]?.message && "border-red-500 border-2",
           "p-3 border rounded-lg accent-black",
+          className,
         )}
         placeholder={placeholder}
         {...register(field, { required: true })}
