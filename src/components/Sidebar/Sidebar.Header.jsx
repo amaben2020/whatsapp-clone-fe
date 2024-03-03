@@ -1,7 +1,7 @@
 import React from "react";
-import { ContactIcon } from "../../svg";
-import ChatIcon from "../../svg/Chat";
-import CommunityIcon from "../../svg/Community";
+import { ContactIcon } from "../svg";
+import ChatIcon from "../svg/Chat";
+import CommunityIcon from "../svg/Community";
 
 const SidebarHeader = () => {
   return (
