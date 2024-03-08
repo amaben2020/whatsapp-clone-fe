@@ -10,7 +10,7 @@ const initialState = {
 
 export const getConversations = createAsyncThunk(
   "conversation",
-  async (token, { isRejectedWithValue }) => {
+  async (token, { rejectWithValue }) => {
     try {
       const { data } = await api.get(ENDPOINTS.conversations, {
         headers: {
@@ -18,11 +18,11 @@ export const getConversations = createAsyncThunk(
         },
       });
 
-      console.log("Data", data);
+      console.log("DATA", data);
 
       return data;
     } catch (error) {
-      return isRejectedWithValue(error);
+      return rejectWithValue(error);
     }
   },
 );
@@ -36,12 +36,17 @@ const chatSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getConversations.fulfilled, (state, action) => {
-      console.log("action", action.payload);
-      state.conversations = action.payload;
-      state.error = "";
-      state.status = "active";
-    });
+    builder
+      .addCase(getConversations.fulfilled, (state, action) => {
+        console.log("action", action.payload);
+        state.conversations = action.payload;
+        state.status = "active";
+      })
+      .addCase(getConversations.rejected, (state, action) => {
+        console.log("action", action);
+        state.error = action.error.message;
+        state.status = "token might have expired";
+      });
   },
 });
 

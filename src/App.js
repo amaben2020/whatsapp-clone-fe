@@ -13,22 +13,20 @@ function App() {
 
   return (
     <PageLayout>
-      <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={user.token ? <View.Home /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/register"
-            element={!user.token ? <View.Register /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/login"
-            element={!user.token ? <View.Login /> : <Navigate to="/" />}
-          />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route
+          path="/"
+          element={user.token ? <View.Home /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/register"
+          element={!user.token ? <View.Register /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/login"
+          element={!user.token ? <View.Login /> : <Navigate to="/" />}
+        />
+      </Routes>
     </PageLayout>
   );
 }

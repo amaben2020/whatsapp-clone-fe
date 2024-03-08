@@ -1,6 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { useForm } from "react-hook-form";
+import Conversations from "../Views/Conversations";
 import Input from "../components/Input/Input";
 import Notification from "../components/Notification/Notification";
 import Sidebar from "../components/Sidebar/Sidebar";
@@ -38,6 +39,7 @@ const PageLayout = ({ children }) => {
             notification={
               <Notification text="Get notified of every new stuff" />
             }
+            conversations={<Conversations />}
           />
         </aside>
         <section>{children}</section>
