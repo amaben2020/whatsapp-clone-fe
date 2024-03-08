@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { ENDPOINTS, api } from "../../../base/api";
 const initialState = {
   conversations: [],
   error: "",
@@ -12,16 +12,13 @@ export const getConversations = createAsyncThunk(
   "conversation",
   async (token, { isRejectedWithValue }) => {
     try {
-      const { data } = await axios.get(
-        "http://localhost:5001/api/v1/conversations",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const { data } = await api.get(ENDPOINTS.conversations, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
 
-      console.log("Data");
+      console.log("Data", data);
 
       return data;
     } catch (error) {

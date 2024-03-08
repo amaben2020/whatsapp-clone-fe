@@ -12,8 +12,9 @@ import {
 } from "redux-persist";
 // import persistReducer from "redux-persist/es/persistReducer";
 import { persistReducer } from "redux-persist";
-import userSlice from "./user/userSlice";
 import persistStore from "redux-persist/es/persistStore";
+import chatSlice from "./chat/chatSlice";
+import userSlice from "./user/userSlice";
 
 // you want to store only a subset of your state of reducer one
 // i.e userSlice:{error:"",  user: { }} ... only user is selected. Doing this would ensure that when the user's status is offline and a refresh is made, it doesn't continue to remain offline, rather only the user data is kept while the status is refetched.
@@ -33,6 +34,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
   user: userSlice,
+  chat: chatSlice,
 });
 
 const persistedReducers = persistReducer(persistConfig, reducers);
