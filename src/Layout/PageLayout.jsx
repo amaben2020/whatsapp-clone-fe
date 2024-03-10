@@ -15,7 +15,6 @@ const PageLayout = ({ children }) => {
   const { user } = useSelector((state) => state);
   const {
     register,
-    handleSubmit,
     watch,
     formState: { errors },
   } = useForm({
@@ -24,17 +23,14 @@ const PageLayout = ({ children }) => {
 
   const searchTerm = watch("searchTerm");
 
-  // console.log("searchTerm", searchTerm);
-
   const dispatch = useDispatch();
 
   const [searchResults, setSearchResults] = useState([]);
 
   const [getData, setGetData] = useState(false);
 
-  console.log(getData);
-
   const handleFetchData = useCallback(async () => {
+    if (searchTerm === undefined) return;
     try {
       const { data } = await api.get(`/user?search=${searchTerm}`, {
         headers: {
@@ -59,14 +55,18 @@ const PageLayout = ({ children }) => {
 
     element.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
-        setGetData(true);
+        if (searchTerm !== undefined) {
+          setGetData(true);
+        } else {
+          setGetData(false);
+        }
 
         setTimeout(() => {
           setGetData(false);
         }, 1500);
       }
     });
-  }, []);
+  }, [searchTerm, searchTerm?.length]);
 
   return (
     <div>
@@ -89,7 +89,9 @@ const PageLayout = ({ children }) => {
                 type="text"
                 field="searchTerm"
                 error={errors}
-                hasSearchTerm={searchTerm.length > 0}
+                hasSearchTerm={
+                  searchTerm !== undefined && searchTerm?.length > 0
+                }
                 id="searcher"
               />
             }
