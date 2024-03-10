@@ -1,32 +1,3 @@
-// import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-// import { getConversations } from "../redux/features/chat/chatSlice";
-// const Conversations = () => {
-//   const data = useSelector((state) => state);
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
-//   console.log("chat", data.chat);
-
-//   useEffect(() => {
-//     if (data.user.user.token) {
-//       dispatch(getConversations(data.user.user.token));
-
-//       if (data.chat?.error.includes("Rejected")) {
-//         navigate("/login");
-//       }
-//     }
-//   }, [data.chat.error, data.user.user.token, dispatch, navigate]);
-//   return (
-//     <div>
-//       Conversations
-//       {JSON.stringify(data.chat.conversations)}
-//     </div>
-//   );
-// };
-
-// export default Conversations;
-
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -55,8 +26,22 @@ const Conversations = () => {
 
   return (
     <div>
-      Conversations
-      {JSON.stringify(chat.conversations)}
+      <div className="p-3 border gap-y-3">
+        <div className="flex items-center gap-x-4">
+          <img
+            src={chat.conversations.data?.users[1]?.picture}
+            alt=""
+            srcset=""
+            className="w-10 h-6 border rounded-2xl"
+          />
+          <h3> {chat.conversations?.data?.users[1].name} </h3>
+        </div>
+
+        <p className="block">
+          {" "}
+          {chat.conversations.data?.latestMessage.message}
+        </p>
+      </div>
     </div>
   );
 };

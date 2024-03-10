@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply bg-gray-800 p-10;
+  }
   h2 {
     @apply text-2xl font-bold;
   }

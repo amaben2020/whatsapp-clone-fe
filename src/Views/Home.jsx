@@ -1,18 +1,14 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { logout } from "../redux/features/user/userSlice";
-const Home = () => {
-  const dispatch = useDispatch();
 
+import Sidebar from "../components/Sidebar/Sidebar";
+
+import PageLayout from "./../Layout/PageLayout";
+
+const Home = () => {
   return (
-    <div>
-      <button
-        onClick={() => dispatch(logout())}
-        className="p-3 border rounded-lg"
-      >
-        Logout
-      </button>
-    </div>
+    <PageLayout>
+      <Sidebar />
+    </PageLayout>
   );
 };
 
