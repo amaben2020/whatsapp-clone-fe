@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { dateHandler } from "../base/utils/date";
 import { getConversations } from "../redux/features/chat/chatSlice";
-
 const Conversations = () => {
   const { user, chat } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -24,6 +24,8 @@ const Conversations = () => {
     return <div>Loading...</div>;
   }
 
+  console.log("chat.conversations", chat.conversations);
+
   return (
     <div>
       <div className="p-3 border gap-y-3">
@@ -37,9 +39,13 @@ const Conversations = () => {
           <h3> {chat.conversations?.data?.users[1].name} </h3>
         </div>
 
-        <p className="block">
+        <p className="flex justify-between mt-3">
           {" "}
-          {chat.conversations.data?.latestMessage.message}
+          <span> {chat.conversations.data?.latestMessage.message} </span>
+          <span className="italic">
+            {" "}
+            {dateHandler(chat.conversations.data?.latestMessage.createdAt)}{" "}
+          </span>
         </p>
       </div>
     </div>
