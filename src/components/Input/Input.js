@@ -1,5 +1,6 @@
 import clsx from "clsx";
-import React, { useState } from "react";
+import React from "react";
+import { ReturnIcon } from "../svg";
 
 const Input = ({
   register,
@@ -9,29 +10,32 @@ const Input = ({
   field,
   error,
   className,
-  variant,
+  hasSearchTerm,
+  id,
 }) => {
-  const [showArrow, setShowArrow] = useState(false);
+  const variant = placeholder.search("search") !== -1 ? "search" : "";
+  console.log(variant);
+
   return (
     <>
       <label htmlFor={label}>{label}</label>
-
       <span className={clsx(variant === "search" && "relative")}>
         <input
+          id={id}
           type={type}
           className={clsx(
             error[field]?.message && "border-red-500 border-2",
-
-            "p-3 border rounded-lg accent-black text-black",
+            "p-3  border rounded-lg accent-black text-black",
             className,
           )}
           placeholder={placeholder}
           {...register(field, { required: true })}
         />
 
-        {variant === "search" && (
+        {!hasSearchTerm && variant === "search" && (
           <span className="absolute z-20 text-black transform -translate-y-1/2 top-1/2 left-2">
-            OK
+            <ReturnIcon className="fill-green-900" />
+            {/* <SendIcon /> */}
           </span>
         )}
       </span>

@@ -24,12 +24,16 @@ const PageLayout = ({ children }) => {
 
   const searchTerm = watch("searchTerm");
 
-  console.log("searchTerm", searchTerm);
+  // console.log("searchTerm", searchTerm);
 
   const dispatch = useDispatch();
 
   const [searchResults, setSearchResults] = useState([]);
-  console.log(searchResults);
+
+  const [getData, setGetData] = useState(false);
+
+  console.log(getData);
+
   const handleFetchData = useCallback(async () => {
     try {
       const { data } = await api.get(`/user?search=${searchTerm}`, {
@@ -37,7 +41,7 @@ const PageLayout = ({ children }) => {
           Authorization: `Bearer ${user?.user?.token}`,
         },
       });
-      console.log(data);
+
       setSearchResults(data);
     } catch (error) {
       console.log(error);
@@ -45,8 +49,24 @@ const PageLayout = ({ children }) => {
   }, [searchTerm, user?.user?.token]);
 
   useEffect(() => {
-    handleFetchData();
-  }, [handleFetchData]);
+    if (getData) {
+      handleFetchData();
+    }
+  }, [handleFetchData, getData]);
+
+  useEffect(() => {
+    const element = window.document.getElementById("searcher");
+
+    element.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        setGetData(true);
+
+        setTimeout(() => {
+          setGetData(false);
+        }, 1500);
+      }
+    });
+  }, []);
 
   return (
     <div>
@@ -59,17 +79,18 @@ const PageLayout = ({ children }) => {
         </button>
       </header>
       <div className="flex min-h-screen gap-x-6">
-        <aside className="w-[40%] border">
+        <aside className="min-w-[30%] border">
           <Sidebar
             input={
               <Input
-                className="  w-[80%]"
+                className="w-[80%] pl-10"
                 register={register}
                 placeholder="Please enter search term"
                 type="text"
                 field="searchTerm"
                 error={errors}
-                variant="search"
+                hasSearchTerm={searchTerm.length > 0}
+                id="searcher"
               />
             }
             header={<SidebarHeader />}
@@ -79,6 +100,7 @@ const PageLayout = ({ children }) => {
             conversations={<Conversations />}
           />
         </aside>
+        {JSON.stringify(searchResults)}
         <section>{children}</section>
       </div>
     </div>
