@@ -1,13 +1,14 @@
 import React from "react";
 
-import Sidebar from "../components/Sidebar/Sidebar";
-
 import PageLayout from "./../Layout/PageLayout";
 
 const Home = () => {
   return (
     <PageLayout>
-      <Sidebar />
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam, omnis
+      ratione possimus quam rerum beatae cumque asperiores praesentium nemo
+      dolore, impedit dolor neque error, numquam laborum. Quam dolor laudantium
+      veritatis.
     </PageLayout>
   );
 };

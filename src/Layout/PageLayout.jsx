@@ -32,16 +32,17 @@ const PageLayout = ({ children }) => {
         </button>
       </header>
       <div className="flex min-h-screen gap-x-6">
-        <aside className="w-[40%] border ">
+        <aside className="w-[40%] border">
           <Sidebar
             input={
               <Input
-                className="w-full p-2"
+                className="  w-[80%]"
                 register={register}
                 placeholder="Please enter search term"
                 type="text"
                 field="searchTerm"
                 error={errors}
+                variant="search"
               />
             }
             header={<SidebarHeader />}
