@@ -12,7 +12,9 @@ import Sidebar from "../components/Sidebar/Sidebar";
 import SidebarHeader from "../components/Sidebar/Sidebar.Header";
 import { logout } from "../redux/features/user/userSlice";
 import { searchSchema } from "../schema/searchSchema";
-import SearchResult from "../Views/SearchResult.jsx";
+
+import UserProfile from "../Views/UserProfile.jsx";
+import SearchResult from "../components/SearchResult/SearchResult.jsx";
 
 const PageLayout = ({ children }) => {
   const { user } = useSelector((state) => state);
@@ -89,6 +91,7 @@ const PageLayout = ({ children }) => {
       <div className="flex min-h-screen gap-x-6">
         <aside className="min-w-[30%] border">
           <Sidebar
+            profile={<UserProfile />}
             input={
               <Input
                 className="w-[80%] pl-10"
@@ -128,7 +131,6 @@ const PageLayout = ({ children }) => {
           />
         </aside>
         {JSON.stringify(searchResults)}
-
         <section>{children}</section>
       </div>
     </div>
