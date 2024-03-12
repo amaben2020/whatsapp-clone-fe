@@ -3,8 +3,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Conversation from "../Views/Conversation";
 import Conversations from "../Views/Conversations";
+
 import { api } from "../base/api";
 import Input from "../components/Input/Input";
 import Notification from "../components/Notification/Notification";
@@ -12,6 +12,7 @@ import Sidebar from "../components/Sidebar/Sidebar";
 import SidebarHeader from "../components/Sidebar/Sidebar.Header";
 import { logout } from "../redux/features/user/userSlice";
 import { searchSchema } from "../schema/searchSchema";
+import SearchResult from "../Views/SearchResult.jsx";
 
 const PageLayout = ({ children }) => {
   const { user } = useSelector((state) => state);
@@ -109,10 +110,10 @@ const PageLayout = ({ children }) => {
             conversations={
               searchResults.length > 0 ? (
                 <div>
-                  <h2>Contacts</h2>
+                  <h2 className="pl-5 my-6">Contacts</h2>
 
                   {searchResults.map((user) => (
-                    <Conversation
+                    <SearchResult
                       status={user.status}
                       picture={user.picture}
                       chatName={user.name}
