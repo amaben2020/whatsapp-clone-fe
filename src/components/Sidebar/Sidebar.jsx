@@ -8,7 +8,7 @@ const Sidebar = ({
   handleSubmit,
 }) => {
   return (
-    <div className="flex flex-col overflow-scroll">
+    <div className="flex flex-col h-[calc(100vh-5.2vh)] overflow-scroll">
       <div className="w-full p-4 mx-auto text-center border align-self-center justify-self-center ">
         {input}
       </div>
