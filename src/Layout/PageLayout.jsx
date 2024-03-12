@@ -2,6 +2,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Conversation from "../Views/Conversation";
 import Conversations from "../Views/Conversations";
 import { api } from "../base/api";
 import Input from "../components/Input/Input";
@@ -13,6 +15,7 @@ import { searchSchema } from "../schema/searchSchema";
 
 const PageLayout = ({ children }) => {
   const { user } = useSelector((state) => state);
+  const navigate = useNavigate();
   const {
     register,
     watch,
@@ -41,8 +44,12 @@ const PageLayout = ({ children }) => {
       setSearchResults(data);
     } catch (error) {
       console.log(error);
+
+      if (error.message.includes("500") !== -1) {
+        navigate("/login");
+      }
     }
-  }, [searchTerm, user?.user?.token]);
+  }, [navigate, searchTerm, user?.user?.token]);
 
   useEffect(() => {
     if (getData) {
@@ -99,10 +106,28 @@ const PageLayout = ({ children }) => {
             notification={
               <Notification text="Get notified of every new stuff" />
             }
-            conversations={<Conversations />}
+            conversations={
+              searchResults.length > 0 ? (
+                <div>
+                  <h2>Contacts</h2>
+
+                  {searchResults.map((user) => (
+                    <Conversation
+                      status={user.status}
+                      picture={user.picture}
+                      chatName={user.name}
+                      joinedDate={user.createdAt}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <Conversations />
+              )
+            }
           />
         </aside>
         {JSON.stringify(searchResults)}
+
         <section>{children}</section>
       </div>
     </div>
