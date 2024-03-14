@@ -47,7 +47,6 @@ const PageLayout = ({ children }) => {
       setSearchResults(data);
     } catch (error) {
       console.log(error);
-
       if (error.message.includes("500") !== -1) {
         navigate("/login");
       }
@@ -114,7 +113,6 @@ const PageLayout = ({ children }) => {
               searchResults.length > 0 ? (
                 <div>
                   <h2 className="pl-5 my-6">Contacts</h2>
-
                   {searchResults.map((user) => (
                     <SearchResult
                       status={user.status}

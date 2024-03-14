@@ -24,8 +24,6 @@ const Conversations = () => {
     return <div>Loading...</div>;
   }
 
-  console.log("chat.conversations", chat.conversations);
-
   return (
     <div>
       <div className="p-3 border gap-y-3">
