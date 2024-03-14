@@ -6,6 +6,7 @@ import {
   DotsIcon,
   StoryIcon,
 } from "../components/svg";
+import { logout } from "../redux/features/user/userSlice";
 
 const UserProfile = ({ picture }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,6 +45,7 @@ const UserProfile = ({ picture }) => {
                 <li> Settings</li>
                 <li
                   onClick={() => {
+                    dispatch(logout());
                     setIsMenuOpen(false);
                   }}
                 >
