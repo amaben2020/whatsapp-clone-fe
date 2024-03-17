@@ -6,6 +6,7 @@ const axiosConfig = {
 };
 export const ENDPOINTS = {
   conversations: "/conversations",
+  messages: "/messages",
 };
 
 // method 2, just do you

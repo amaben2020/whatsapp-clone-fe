@@ -17,7 +17,11 @@ import UserProfile from "../Views/UserProfile.jsx";
 import SearchResult from "../components/SearchResult/SearchResult.jsx";
 
 const PageLayout = ({ children }) => {
-  const { user } = useSelector((state) => state);
+  const {
+    user,
+    chat: { activeConversation },
+  } = useSelector((state) => state);
+
   const navigate = useNavigate();
   const {
     register,
@@ -129,6 +133,7 @@ const PageLayout = ({ children }) => {
           />
         </aside>
         {JSON.stringify(searchResults)}
+        {JSON.stringify(activeConversation)}
         <section>{children}</section>
       </div>
     </div>

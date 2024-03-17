@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { dateHandler } from "../base/utils/date";
-import { getConversations } from "../redux/features/chat/chatSlice";
+import {
+  getConversations,
+  getMessagesWithConversationId,
+} from "../redux/features/chat/chatSlice";
 const Conversations = () => {
   const { user, chat } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -25,11 +28,27 @@ const Conversations = () => {
   }
 
   console.log("chat.conversations", chat.conversations);
+  console.log("user.user.token", user.user.token);
+
+  const handleMessages = async (convoId) => {
+    console.log(convoId);
+    try {
+      const response = await dispatch(
+        getMessagesWithConversationId(convoId, user.user.token),
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
       {chat.conversations?.data?.map((convo) => (
-        <div className="p-3 border gap-y-3">
+        <div
+          className="p-3 border gap-y-3 hover:cursor-pointer hover:bg-gray-800"
+          onClick={() => handleMessages(convo?._id)}
+        >
           <div className="flex items-center gap-x-4">
             <img
               src={convo?.users[1]?.picture}
