@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Menu from "../components/Menu/Menu";
 import {
@@ -11,10 +11,7 @@ import {
 const UserProfile = ({ picture }) => {
   const { user } = useSelector((state) => state);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  useEffect(() => {
-    console.log("Ran");
-    console.count();
-  }, []);
+
   return (
     <div className="flex items-center justify-between gap-6 p-6">
       <div>

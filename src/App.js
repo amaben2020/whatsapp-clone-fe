@@ -7,7 +7,7 @@ function App() {
   const { user } = useSelector((state) => state.user);
   const token = user.token;
 
-  const { isExpired } = useJwt(token);
+  const { isExpired, decodedToken } = useJwt(token);
 
   return (
     <Routes>
@@ -18,7 +18,7 @@ function App() {
 
       <Route
         path="/register"
-        element={isExpired ? <View.Register /> : <Navigate to="/" />}
+        element={decodedToken?.userId ? <Navigate to="/" /> : <View.Register />}
       />
       <Route
         exact
