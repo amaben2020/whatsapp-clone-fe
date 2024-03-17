@@ -21,31 +21,35 @@ const Conversations = () => {
   }, [chat.error, navigate]);
 
   if (!chat.conversations) {
-    return <div>Loading...</div>;
+    return <div>No conversations found for this user</div>;
   }
+
+  console.log("chat.conversations", chat.conversations);
 
   return (
     <div>
-      <div className="p-3 border gap-y-3">
-        <div className="flex items-center gap-x-4">
-          <img
-            src={chat.conversations.data?.users[1]?.picture}
-            alt=""
-            srcset=""
-            className="w-10 h-6 border rounded-2xl"
-          />
-          <h3> {chat.conversations?.data?.users[1].name} </h3>
-        </div>
+      {chat.conversations?.data?.map((convo) => (
+        <div className="p-3 border gap-y-3">
+          <div className="flex items-center gap-x-4">
+            <img
+              src={convo?.users[1]?.picture}
+              alt=""
+              srcset=""
+              className="w-10 h-6 border rounded-2xl"
+            />
+            <h3> {convo.users[1].name} </h3>
+          </div>
 
-        <p className="flex justify-between mt-3">
-          {" "}
-          <span> {chat.conversations.data?.latestMessage.message} </span>
-          <span className="italic">
+          <p className="flex justify-between mt-3">
             {" "}
-            {dateHandler(chat.conversations.data?.latestMessage.createdAt)}{" "}
-          </span>
-        </p>
-      </div>
+            <span> {convo?.latestMessage.message} </span>
+            <span className="italic">
+              {" "}
+              {dateHandler(convo?.latestMessage.createdAt)}{" "}
+            </span>
+          </p>
+        </div>
+      ))}
     </div>
   );
 };
