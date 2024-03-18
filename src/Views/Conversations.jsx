@@ -58,10 +58,10 @@ const Conversations = () => {
 
           <p className="flex justify-between mt-3">
             {" "}
-            <span> {convo?.latestMessage.message} </span>
+            <span> {convo?.latestMessage?.message} </span>
             <span className="italic">
               {" "}
-              {dateHandler(convo?.latestMessage.createdAt)}{" "}
+              {dateHandler(convo?.latestMessage?.createdAt)}{" "}
             </span>
           </p>
         </div>

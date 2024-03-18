@@ -84,7 +84,7 @@ const PageLayout = () => {
 
   console.log("activeConversation?.conversation?.name ", activeConversation);
   const receiverInfo = activeConversation[0]?.conversation;
-  console.log("receiverInfo", receiverInfo);
+
   // based on the convo,
   return (
     <div>
