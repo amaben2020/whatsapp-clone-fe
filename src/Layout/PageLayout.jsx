@@ -147,9 +147,7 @@ const PageLayout = () => {
             picture={receiverInfo?.users[1]?.picture}
             name={receiverInfo?.name ?? ""}
           />
-          <div className="p-6">
-            {JSON.stringify(searchResults)}
-
+          <div>
             {activeConversation?.length ? (
               <ChatActions activeConvo={activeConversation} />
             ) : (
