@@ -2,7 +2,16 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        slide: {
+          "0%": { transform: "translateY(-100%)" },
+        },
+      },
+      animation: {
+        slideUp: "slide 2s duration-150",
+      },
+    },
   },
   plugins: [],
 };
