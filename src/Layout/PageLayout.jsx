@@ -13,6 +13,7 @@ import SidebarHeader from "../components/Sidebar/Sidebar.Header";
 import { logout } from "../redux/features/user/userSlice";
 import { searchSchema } from "../schema/searchSchema";
 
+import ChatActions from "../components/Chat/ChatActions.jsx";
 import Profile from "../components/Profile/Profile.jsx";
 import SearchResult from "../components/SearchResult/SearchResult.jsx";
 
@@ -83,7 +84,8 @@ const PageLayout = () => {
   }, [searchTerm, searchTerm?.length]);
 
   console.log("activeConversation?.conversation?.name ", activeConversation);
-  const receiverInfo = activeConversation[0]?.conversation;
+  const receiverInfo =
+    activeConversation && activeConversation[0]?.conversation;
 
   // based on the convo,
   return (
@@ -142,12 +144,17 @@ const PageLayout = () => {
 
         <section>
           <Profile
-            picture={receiverInfo?.users[1].picture}
+            picture={receiverInfo?.users[1]?.picture}
             name={receiverInfo?.name ?? ""}
           />
           <div className="p-6">
             {JSON.stringify(searchResults)}
-            {JSON.stringify(activeConversation)}
+
+            {activeConversation?.length ? (
+              <ChatActions activeConvo={activeConversation} />
+            ) : (
+              <div>Not Found</div>
+            )}
           </div>
         </section>
       </div>
