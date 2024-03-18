@@ -27,9 +27,6 @@ const Conversations = () => {
     return <div>No conversations found for this user</div>;
   }
 
-  console.log("chat.conversations", chat.conversations);
-  console.log("user.user.token", user.user.token);
-
   const handleMessages = async (convoId) => {
     console.log(convoId);
     try {

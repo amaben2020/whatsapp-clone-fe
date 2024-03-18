@@ -7,8 +7,10 @@ const Profile = ({ picture, name }) => {
 
   return (
     <div className="flex items-center justify-between gap-6 p-6 border-b-2">
-      <div>
+      <div className="flex items-center gap-4">
         <img src={picture} alt="" className="rounded-[150px] max-w-12" />
+
+        <p className="text-white">{name}</p>
       </div>
       {!name?.length && (
         <ul className="flex items-center gap-6">

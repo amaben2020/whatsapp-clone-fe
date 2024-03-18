@@ -19,8 +19,10 @@ import SearchResult from "../components/SearchResult/SearchResult.jsx";
 const PageLayout = () => {
   const {
     user,
-    chat: { activeConversation },
+    chat: { activeConversation, conversations },
   } = useSelector((state) => state);
+
+  console.log(conversations);
 
   const navigate = useNavigate();
   const {
@@ -65,7 +67,6 @@ const PageLayout = () => {
 
   useEffect(() => {
     const element = window.document.getElementById("searcher");
-
     element.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         if (searchTerm !== undefined) {
@@ -81,6 +82,10 @@ const PageLayout = () => {
     });
   }, [searchTerm, searchTerm?.length]);
 
+  console.log("activeConversation?.conversation?.name ", activeConversation);
+  const receiverInfo = activeConversation[0]?.conversation;
+  console.log("receiverInfo", receiverInfo);
+  // based on the convo,
   return (
     <div>
       <header className="block w-full p-5 text-white bg-black">
@@ -134,7 +139,10 @@ const PageLayout = () => {
         </aside>
 
         <section>
-          <Profile picture={user.user.picture} name={user.user.name} />
+          <Profile
+            picture={receiverInfo?.users[1].picture}
+            name={receiverInfo?.name ?? ""}
+          />
           <div className="p-6">
             {JSON.stringify(searchResults)}
             {JSON.stringify(activeConversation)}
