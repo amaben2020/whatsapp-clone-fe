@@ -13,10 +13,10 @@ import SidebarHeader from "../components/Sidebar/Sidebar.Header";
 import { logout } from "../redux/features/user/userSlice";
 import { searchSchema } from "../schema/searchSchema";
 
-import UserProfile from "../Views/UserProfile.jsx";
+import Profile from "../components/Profile/Profile.jsx";
 import SearchResult from "../components/SearchResult/SearchResult.jsx";
 
-const PageLayout = ({ children }) => {
+const PageLayout = () => {
   const {
     user,
     chat: { activeConversation },
@@ -91,10 +91,10 @@ const PageLayout = ({ children }) => {
           Logout
         </button>
       </header>
-      <div className="flex min-h-screen gap-x-6">
+      <div className="flex min-h-screen">
         <aside className="min-w-[30%] border">
           <Sidebar
-            profile={<UserProfile />}
+            profile={<Profile picture={user.user.picture} />}
             input={
               <Input
                 className="w-[80%] pl-10"
@@ -132,9 +132,14 @@ const PageLayout = ({ children }) => {
             }
           />
         </aside>
-        {JSON.stringify(searchResults)}
-        {JSON.stringify(activeConversation)}
-        <section>{children}</section>
+
+        <section>
+          <Profile picture={user.user.picture} name={user.user.name} />
+          <div className="p-6">
+            {JSON.stringify(searchResults)}
+            {JSON.stringify(activeConversation)}
+          </div>
+        </section>
       </div>
     </div>
   );
