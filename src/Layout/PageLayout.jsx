@@ -124,10 +124,12 @@ const PageLayout = () => {
                   <h2 className="pl-5 my-6">Contacts</h2>
                   {searchResults.map((user) => (
                     <SearchResult
+                      key={user._id}
                       status={user.status}
                       picture={user.picture}
                       chatName={user.name}
                       joinedDate={user.createdAt}
+                      receiverId={user._id}
                     />
                   ))}
                 </div>
